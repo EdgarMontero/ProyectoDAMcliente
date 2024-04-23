@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_historial"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_historial" />
+
+        <item
+            android:id="@+id/nav_crear_consulta"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_crear_consulta" />
+
+        <item
+            android:id="@+id/nav_editar_paciente"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_editar_paciente" />
+
+        <!-- Nuevo ítem para Agenda -->
+        <item
+            android:id="@+id/nav_agenda"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_agenda" />
+
+        <!-- Nuevo ítem para Crear Paciente -->
+        <item
+            android:id="@+id/nav_crear_paciente"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_crear_paciente" />
+    </group>
+</menu>

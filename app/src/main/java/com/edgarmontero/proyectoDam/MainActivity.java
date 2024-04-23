@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                             if (result.toString().trim().equals("Login success")) {
                                 Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                 // Cambio a la actividad del menú principal
-                                Intent intent = new Intent(MainActivity.this, MenuPrincipalActivity.class);
+                                Intent intent = new Intent(MainActivity.this, MenuDesplegable.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();

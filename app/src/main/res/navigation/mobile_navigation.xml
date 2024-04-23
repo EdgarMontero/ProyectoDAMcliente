@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.edgarmontero.proyectoDam.ui.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_historial"
+            app:destination="@id/nav_historial" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_crear_consulta"
+            app:destination="@id/nav_crear_consulta" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_editar_paciente"
+            app:destination="@id/nav_editar_paciente" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_agenda"
+            app:destination="@id/nav_agenda" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_crear_paciente"
+            app:destination="@id/nav_crear_paciente" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_historial"
+        android:name="com.edgarmontero.proyectoDam.ui.HistorialPaciente"
+        android:label="@string/menu_historial"
+        tools:layout="@layout/fragment_historial_paciente" />
+
+    <fragment
+        android:id="@+id/nav_crear_consulta"
+        android:name="com.edgarmontero.proyectoDam.ui.CrearConsulta"
+        android:label="@string/menu_crear_consulta"
+        tools:layout="@layout/fragment_crear_consulta" />
+
+    <fragment
+        android:id="@+id/nav_editar_paciente"
+        android:name="com.edgarmontero.proyectoDam.ui.EditarPaciente"
+        android:label="@string/menu_editar_paciente"
+        tools:layout="@layout/fragment_editar_paciente" />
+
+    <fragment
+        android:id="@+id/nav_agenda"
+        android:name="com.edgarmontero.proyectoDam.ui.Agenda"
+        android:label="@string/menu_agenda"
+        tools:layout="@layout/fragment_agenda" />
+
+    <fragment
+        android:id="@+id/nav_crear_paciente"
+        android:name="com.edgarmontero.proyectoDam.ui.CrearPaciente"
+        android:label="@string/menu_crear_paciente"
+        tools:layout="@layout/fragment_crear_paciente" />
+
+</navigation>

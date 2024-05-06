@@ -3,6 +3,7 @@ package com.edgarmontero.proyectoDam;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://10.0.2.2/api/login.php");
+                    URL url = new URL(getString(R.string.loginURL));
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);
@@ -81,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             if (result.toString().trim().equals("Login success")) {
                                 Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("username", username);
+                                editor.apply();
+
                                 // Cambio a la actividad del menú principal
                                 Intent intent = new Intent(MainActivity.this, MenuDesplegable.class);
                                 startActivity(intent);

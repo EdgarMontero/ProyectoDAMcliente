@@ -32,6 +32,8 @@ import java.net.URLEncoder;
 public class EditarPaciente extends Fragment {
 
     private FragmentEditarPacienteBinding binding;
+    private EditText editTextBuscarUsuario;
+    private Button buttonBuscarUsuario;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -39,33 +41,29 @@ public class EditarPaciente extends Fragment {
         binding = FragmentEditarPacienteBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        EditText editTextBuscarUsuario = binding.editTextBuscarUsuario;
-        Button buttonBuscarUsuario = binding.buttonBuscarUsuario;
+        editTextBuscarUsuario = binding.editTextBuscarUsuario;
+        buttonBuscarUsuario = binding.buttonBuscarUsuario;
 
         buttonBuscarUsuario.setOnClickListener(v -> {
-            String usuarioBuscado = editTextBuscarUsuario.getText().toString();
-            buscarUsuario(usuarioBuscado);
-            editTextBuscarUsuario.setVisibility(View.GONE);
-            buttonBuscarUsuario.setVisibility(View.GONE);
+            String dniPaciente = editTextBuscarUsuario.getText().toString();
+            buscarUsuario(dniPaciente);
+
 
         });
-
-
-
         return root;
     }
 
-    private void buscarUsuario(String nombreUsuario) {
+    private void buscarUsuario(String dniPaciente) {
         Thread thread = new Thread(() -> {
             try {
-                URL url = new URL(getString(R.string.buscarPacienteURL)); // Asegúrate de cambiar esta URL.
+                URL url = new URL(getString(R.string.ip) + "buscarPaciente.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                String postData = URLEncoder.encode("nombre_usuario", "UTF-8") + "=" + URLEncoder.encode(nombreUsuario, "UTF-8");
+                String postData = URLEncoder.encode("dni_paciente", "UTF-8") + "=" + URLEncoder.encode(dniPaciente, "UTF-8");
 
                 writer.write(postData);
                 writer.flush();
@@ -83,21 +81,34 @@ public class EditarPaciente extends Fragment {
                     }
 
                     reader.close();
-                    updateEditTexts(new JSONObject(response.toString()));
+                    JSONObject jsonObject = new JSONObject(response.toString());
+
+                    if(jsonObject.has("error")) {
+                        String errorMsg = jsonObject.getString("error");
+                        getActivity().runOnUiThread(() -> Toast.makeText(getContext(), errorMsg, Toast.LENGTH_SHORT).show());
+                    } else {
+                        updateEditTexts(jsonObject);
+                    }
                 } else {
-                    getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Error en la búsqueda", Toast.LENGTH_SHORT).show());
+                    getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Error en la conexión: " + responseCode, Toast.LENGTH_SHORT).show());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Error técnico al procesar la búsqueda", Toast.LENGTH_SHORT).show());
             }
         });
         thread.start();
     }
 
+
     private void updateEditTexts(JSONObject jsonObject) throws JSONException {
         getActivity().runOnUiThread(() -> {
             try {
+
                 // Hace visibles los EditText y el botón de guardar
+                editTextBuscarUsuario.setVisibility(View.GONE);
+                buttonBuscarUsuario.setVisibility(View.GONE);
+
                 EditText etNombre = binding.etNombrePaciente;
                 etNombre.setVisibility(View.VISIBLE);
 

@@ -62,7 +62,7 @@ public class CrearPaciente extends Fragment {
 
         autoCompleteTextViewUser = binding.autoCompleteTextViewUser;
 
-        fetchUsers();  // Fetch users and set up adapter after data is loaded
+        fetchUsers();
 
         setupViewBindings();
 
@@ -99,7 +99,7 @@ public class CrearPaciente extends Fragment {
     private void fetchUsers() {
         Thread thread = new Thread(() -> {
             try {
-                URL url = new URL(getString(R.string.fetchUsersURL));
+                URL url = new URL(getString(R.string.ip)+"fetchUsers.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.connect();
@@ -245,16 +245,20 @@ public class CrearPaciente extends Fragment {
     }
 
     private void savePatientData(String dni, String nombre, String fechaNacimiento, String direccion, String telefono) {
+        // Convertir DNI a mayúsculas y hacerlo final para usar en lambda
+        final String finalDni = dni.toUpperCase();
+
         Thread thread = new Thread(() -> {
             try {
-                URL url = new URL(getString(R.string.guardarPacienteURL));
+                URL url = new URL(getString(R.string.ip) + "guardarPaciente.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                String data = URLEncoder.encode("dni_paciente", "UTF-8") + "=" + URLEncoder.encode(dni, "UTF-8");
+
+                String data = URLEncoder.encode("dni_paciente", "UTF-8") + "=" + URLEncoder.encode(finalDni, "UTF-8");
                 data += "&" + URLEncoder.encode("nombre", "UTF-8") + "=" + URLEncoder.encode(nombre, "UTF-8");
                 data += "&" + URLEncoder.encode("fecha_nacimiento", "UTF-8") + "=" + URLEncoder.encode(fechaNacimiento, "UTF-8");
                 data += "&" + URLEncoder.encode("direccion", "UTF-8") + "=" + URLEncoder.encode(direccion, "UTF-8");
@@ -282,7 +286,7 @@ public class CrearPaciente extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
                 getActivity().runOnUiThread(() -> {
-                    Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT). show();
                 });
             }
         });

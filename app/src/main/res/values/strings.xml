@@ -24,12 +24,14 @@
     <string name="guardar_paciente">Crear paciente</string>
     <string name="select_user">Usuario</string>
 
+    <string name="ip">http://192.168.9.63/api/</string>
+
     <string name="loginURL">http://192.168.1.15/api/login.php</string>
     <string name="fetchUsersURL">http://192.168.1.15/api/fetchUsers.php</string>
     <string name="guardarPacienteURL">http://192.168.1.15/api/guardarPaciente.php</string>
     <string name="buscarPacienteURL">http://192.168.1.15/api/buscarPaciente.php</string>
 
-    <string name="buscar_usuario">Introducir nombre usuario</string>
+    <string name="buscar_usuario">Introducir DNI del paciente</string>
     <string name="buscar">Buscar</string>
 
 </resources>

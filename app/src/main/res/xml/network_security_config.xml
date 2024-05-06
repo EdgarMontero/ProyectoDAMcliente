@@ -4,6 +4,6 @@
     <domain-config cleartextTrafficPermitted="true">  <!-- Permite tráfico cleartext específicamente para estos dominios -->
         <domain includeSubdomains="true">127.0.0.1</domain>
         <domain includeSubdomains="true">10.0.2.2</domain> <!-- Para emuladores -->
-        <domain includeSubdomains="true">192.168.1.15</domain> <!-- IP de tu máquina de desarrollo, cambia 192.168.x.x por tu IP actual -->
+        <domain includeSubdomains="true">192.168.9.63</domain> <!-- IP de tu máquina de desarrollo, cambia 192.168.x.x por tu IP actual -->
     </domain-config>
 </network-security-config>

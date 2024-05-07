@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.edgarmontero.proyectoDam.MainActivity;
 import com.edgarmontero.proyectoDam.Objetos.User;
 import com.edgarmontero.proyectoDam.R;
 import com.edgarmontero.proyectoDam.databinding.FragmentCrearPacienteBinding;
@@ -165,7 +164,7 @@ public class CrearPaciente extends Fragment {
             return false;
         }
 
-        if (!Validator.isBirthDateValid(fechaNacimiento, context)) {
+        if (!Validator.isDateValid(fechaNacimiento, context)) {
             return false;
         }
 

@@ -1,5 +1,6 @@
 package com.edgarmontero.proyectoDam.ui;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 
 import com.edgarmontero.proyectoDam.R;
 import com.edgarmontero.proyectoDam.databinding.FragmentEditarPacienteBinding;
-import com.edgarmontero.proyectoDam.databinding.FragmentHistorialPacienteBinding;
 import com.edgarmontero.proyectoDam.utils.Validator;
 
 import org.json.JSONException;
@@ -28,6 +28,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Calendar;
 
 
 public class EditarPaciente extends Fragment {
@@ -65,6 +66,20 @@ public class EditarPaciente extends Fragment {
             String direccion = etDireccion.getText().toString();
             String telefono = etTelefono.getText().toString();
             actualizarPaciente(dniPaciente, nombre, fechaNacimiento, direccion, telefono);
+        });
+
+        etFechaNacimiento.setOnClickListener(view -> {
+            Calendar calendario = Calendar.getInstance();
+            int year = calendario.get(Calendar.YEAR);
+            int month = calendario.get(Calendar.MONTH);
+            int day = calendario.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                    (datePicker, year1, monthOfYear, dayOfMonth) -> {
+                        String fechaSeleccionada = String.format("%04d-%02d-%02d", year1, monthOfYear + 1, dayOfMonth);
+                        etFechaNacimiento.setText(fechaSeleccionada);
+                    }, year, month, day);
+            datePickerDialog.show();
         });
 
         return root;
@@ -164,7 +179,7 @@ public class EditarPaciente extends Fragment {
             return;
         }
 
-        if (!Validator.isBirthDateValid(fechaNacimiento, getContext())) {
+        if (!Validator.isDateValid(fechaNacimiento, getContext())) {
             return;
         }
 

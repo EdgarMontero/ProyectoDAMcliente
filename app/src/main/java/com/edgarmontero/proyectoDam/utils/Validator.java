@@ -33,10 +33,10 @@ public class Validator {
         }
     }
 
-    public static boolean isBirthDateValid(String fechaNacimiento, Context context) {
+    public static boolean isDateValid(String fecha, Context context) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaNac = sdf.parse(fechaNacimiento);
+            Date fechaNac = sdf.parse(fecha);
             Date fechaActual = new Date();
             if (!fechaNac.before(fechaActual)) {
                 Toast.makeText(context, "La fecha de nacimiento debe ser anterior al día de hoy", Toast.LENGTH_SHORT).show();

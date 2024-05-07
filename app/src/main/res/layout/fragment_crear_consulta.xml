@@ -7,12 +7,6 @@
     tools:context=".ui.CrearConsulta">
 
     <EditText
-        android:id="@+id/etMedicoId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ID del médico" />
-
-    <EditText
         android:id="@+id/etPacienteId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

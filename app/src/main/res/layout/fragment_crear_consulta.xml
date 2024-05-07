@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.CrearConsulta">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/etMedicoId"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:hint="ID del médico" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/etPacienteId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID del paciente" />
+
+    <EditText
+        android:id="@+id/etTipoConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tipo de consulta" />
+
+    <EditText
+        android:id="@+id/etDescripcionConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción de la consulta" />
+
+    <EditText
+        android:id="@+id/etFechaConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha de la consulta"
+        android:focusable="false" />
+
+    <Button
+        android:id="@+id/btnCrearConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Consulta" />
+
+</LinearLayout>

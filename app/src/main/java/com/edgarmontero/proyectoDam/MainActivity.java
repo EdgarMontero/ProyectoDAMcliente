@@ -3,6 +3,7 @@ package com.edgarmontero.proyectoDam;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -76,11 +77,21 @@ public class MainActivity extends AppCompatActivity {
                     reader.close();
                     in.close();
 
+                    final String response = result.toString().trim();
+                    final String[] parts = response.split(",");
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (result.toString().trim().equals("Login success")) {
+                            if (parts[0].equals("Login success")) {
                                 Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                                // Guardar DNI Medico en SharedPreferences
+                                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("dni_medico", parts[1]);
+                                editor.apply();
+
                                 // Cambio a la actividad del menú principal
                                 Intent intent = new Intent(MainActivity.this, MenuDesplegable.class);
                                 startActivity(intent);
@@ -98,4 +109,5 @@ public class MainActivity extends AppCompatActivity {
 
         thread.start();
     }
+
 }

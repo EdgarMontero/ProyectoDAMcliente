@@ -1,6 +1,7 @@
 package com.edgarmontero.proyectoDam.ui;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +19,7 @@ import com.edgarmontero.proyectoDam.MainActivity;
 import com.edgarmontero.proyectoDam.Objetos.User;
 import com.edgarmontero.proyectoDam.R;
 import com.edgarmontero.proyectoDam.databinding.FragmentCrearPacienteBinding;
+import com.edgarmontero.proyectoDam.utils.Validator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,11 +35,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,24 +44,16 @@ import java.util.Map;
 public class CrearPaciente extends Fragment {
 
     private FragmentCrearPacienteBinding binding;
-
-    private static final char[] LETRAS_DNI = {
-            'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'
-    };
     List<User> usersList = new ArrayList<>();
     AutoCompleteTextView autoCompleteTextViewUser;
     Map<String, Integer> userNameToIdMap = new HashMap<>();
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCrearPacienteBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         autoCompleteTextViewUser = binding.autoCompleteTextViewUser;
-
         fetchUsers();
-
         setupViewBindings();
 
         return root;
@@ -159,88 +149,30 @@ public class CrearPaciente extends Fragment {
     }
 
     private void savePatient(String dni, String nombre, String fechaNacimiento, String direccion, String telefono) {
-        // Comprobación de campos vacíos
-        if (!areFieldsValid(dni, nombre, fechaNacimiento, direccion, telefono)) {
-            return;
-        }
-
-        // Validación de la fecha de nacimiento
-        if (!isBirthDateValid(fechaNacimiento)) {
-            return;
-        }
-
-        // Validación del teléfono
-        if (!isPhoneValid(telefono)) {
-            return;
-        }
-
-        // Realizar conexión y guardar datos del paciente
-        savePatientData(dni, nombre, fechaNacimiento, direccion, telefono);
-    }
-
-    public static boolean validarDNI(String dni) {
-        // Verifica que la longitud sea correcta y que el último carácter sea una letra
-        if (dni == null || dni.length() != 9 || !Character.isLetter(dni.charAt(8))) {
-            return false;
-        }
-
-        // Extrae la parte numérica y la letra del DNI
-        String parteNumerica = dni.substring(0, 8);
-        char letra = Character.toUpperCase(dni.charAt(8));  // Convierte la letra a mayúscula
-
-        try {
-            // Convierte la parte numérica a entero
-            int numerosDNI = Integer.parseInt(parteNumerica);
-            // Calcula el índice de la letra de control
-            int indice = numerosDNI % 23;
-            // Obtiene la letra correspondiente del array
-            char letraCalculada = LETRAS_DNI[indice];
-
-            // Comprueba si la letra calculada coincide con la letra del DNI
-            return letra == letraCalculada;
-        } catch (NumberFormatException e) {
-            // En caso de que la parte numérica no sea un número válido
-            return false;
+        if (areFieldsValid(dni, nombre, fechaNacimiento, direccion, telefono)) {
+            savePatientData(dni, nombre, fechaNacimiento, direccion, telefono);
         }
     }
-
 
     private boolean areFieldsValid(String dni, String nombre, String fechaNacimiento, String direccion, String telefono) {
+        Context context = getContext();
         if (dni.isEmpty() || nombre.isEmpty() || fechaNacimiento.isEmpty() || direccion.isEmpty() || telefono.isEmpty()) {
-            Toast.makeText(getContext(), "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (!validarDNI(dni)) {
-            Toast.makeText(getContext(), "DNI no válido", Toast.LENGTH_SHORT).show();
+        if (!Validator.validarDNI(dni, context)) {
             return false;
         }
 
-        return true;
-    }
-
-    private boolean isBirthDateValid(String fechaNacimiento) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaNac = sdf.parse(fechaNacimiento);
-            Date fechaActual = new Date();
-            if (!fechaNac.before(fechaActual)) {
-                Toast.makeText(getContext(), "La fecha de nacimiento debe ser anterior al día de hoy", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), "Formato de fecha no válido", Toast.LENGTH_SHORT).show();
+        if (!Validator.isBirthDateValid(fechaNacimiento, context)) {
             return false;
         }
-        return true;
-    }
 
-    private boolean isPhoneValid(String telefono) {
-        if (!telefono.matches("\\d{9}")) {
-            Toast.makeText(getContext(), "El teléfono debe tener 9 dígitos", Toast.LENGTH_SHORT).show();
+        if (!Validator.isPhoneValid(telefono, context)) {
             return false;
         }
+
         return true;
     }
 

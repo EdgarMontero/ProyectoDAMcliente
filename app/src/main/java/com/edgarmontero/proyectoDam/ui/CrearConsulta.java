@@ -22,7 +22,21 @@ public class CrearConsulta extends Fragment {
 
         binding = FragmentCrearConsultaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        // Configuración del botón
+        binding.btnCrearConsulta.setOnClickListener(v -> crearConsulta());
+
         return root;
+    }
+
+    private void crearConsulta() {
+        String medicoId = binding.etMedicoId.getText().toString();
+        String pacienteId = binding.etPacienteId.getText().toString();
+        String tipoConsulta = binding.etTipoConsulta.getText().toString();
+        String descripcion = binding.etDescripcionConsulta.getText().toString();
+        String fecha = binding.etFechaConsulta.getText().toString();
+
+        // Aquí deberías agregar el código para insertar los datos en la base de datos
     }
 
     @Override

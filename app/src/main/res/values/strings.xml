@@ -24,7 +24,7 @@
     <string name="guardar_paciente">Crear paciente</string>
     <string name="select_user">Usuario</string>
 
-    <string name="ip">http://192.168.9.63/api/</string>
+    <string name="ip">http://192.168.1.15/api/</string>
 
     <string name="loginURL">http://192.168.1.15/api/login.php</string>
     <string name="fetchUsersURL">http://192.168.1.15/api/fetchUsers.php</string>
@@ -33,5 +33,7 @@
 
     <string name="buscar_usuario">Introducir DNI del paciente</string>
     <string name="buscar">Buscar</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
 
 </resources>

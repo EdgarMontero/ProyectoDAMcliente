@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,11 +53,7 @@ public class CrearConsulta extends Fragment {
         final EditText etdescripcion = binding.etDescripcionConsulta;
         final EditText etfecha = binding.etFechaConsulta;
 
-        String pacienteId = etpacienteId.getText().toString();
-        String tipoConsulta = ettipoConsulta.getText().toString();
-        String descripcion = etdescripcion.getText().toString();
-        String fecha = etfecha.getText().toString();
-        binding.btnCrearConsulta.setOnClickListener(v -> crearConsulta(pacienteId, tipoConsulta, descripcion, fecha));
+        binding.btnCrearConsulta.setOnClickListener(v -> crearConsulta(etpacienteId.getText().toString(), ettipoConsulta.getText().toString(), etdescripcion.getText().toString(), etfecha.getText().toString()));
 
         etfecha.setOnClickListener(view -> {
             Calendar calendario = Calendar.getInstance();
@@ -84,6 +81,9 @@ public class CrearConsulta extends Fragment {
         Context context = getContext();
         if (pacienteId.isEmpty() || tipoConsulta.isEmpty() || descripcion.isEmpty() || fecha.isEmpty()) {
             Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!Validator.validarDNI(pacienteId, context)) {
             return false;
         }
 
@@ -151,9 +151,9 @@ public class CrearConsulta extends Fragment {
             getActivity().runOnUiThread(() -> {
                 Toast.makeText(getContext(), finalMessage, Toast.LENGTH_SHORT).show();
                 // Retroceder al fragmento anterior
-                if (getActivity() != null) {
-                    getActivity().getSupportFragmentManager().popBackStack();
-                }
+                NavHostFragment.findNavController(CrearConsulta.this)
+                        .navigate(R.id.action_nav_crear_consulta_to_nav_home);
+
             });
         } else {
             String finalMessage2 = "Error al crear consulta";

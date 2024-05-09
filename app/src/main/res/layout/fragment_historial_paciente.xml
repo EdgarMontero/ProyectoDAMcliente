@@ -5,10 +5,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.HistorialPaciente">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:context=".ui.HistorialPaciente">
+
+            <EditText
+                android:id="@+id/editTextDniPaciente"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_search_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/buscar_usuario"
+                android:inputType="text"
+                android:padding="12dp" />
+
+            <Button
+                android:id="@+id/buttonBuscarPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buscar" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listViewConsultas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/editTextDniPaciente" />
+
+    </LinearLayout>
 
 </FrameLayout>

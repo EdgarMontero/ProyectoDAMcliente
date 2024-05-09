@@ -37,13 +37,21 @@
         android:id="@+id/nav_crear_consulta"
         android:name="com.edgarmontero.proyectoDam.ui.CrearConsulta"
         android:label="@string/menu_crear_consulta"
-        tools:layout="@layout/fragment_crear_consulta" />
+        tools:layout="@layout/fragment_crear_consulta" >
+        <action
+            android:id="@+id/action_nav_crear_consulta_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_editar_paciente"
         android:name="com.edgarmontero.proyectoDam.ui.EditarPaciente"
         android:label="@string/menu_editar_paciente"
-        tools:layout="@layout/fragment_editar_paciente" />
+        tools:layout="@layout/fragment_editar_paciente" >
+        <action
+            android:id="@+id/action_nav_editar_paciente_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_agenda"
@@ -55,6 +63,10 @@
         android:id="@+id/nav_crear_paciente"
         android:name="com.edgarmontero.proyectoDam.ui.CrearPaciente"
         android:label="@string/menu_crear_paciente"
-        tools:layout="@layout/fragment_crear_paciente" />
+        tools:layout="@layout/fragment_crear_paciente" >
+        <action
+            android:id="@+id/action_nav_crear_paciente_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
 </navigation>

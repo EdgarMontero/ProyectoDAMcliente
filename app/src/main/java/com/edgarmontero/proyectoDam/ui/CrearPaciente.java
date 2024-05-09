@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.edgarmontero.proyectoDam.Objetos.User;
 import com.edgarmontero.proyectoDam.R;
@@ -243,9 +244,9 @@ public class CrearPaciente extends Fragment {
             getActivity().runOnUiThread(() -> {
                 Toast.makeText(getContext(), finalMessage, Toast.LENGTH_SHORT).show();
                 // Retroceder al fragmento anterior
-                if (getActivity() != null) {
-                    getActivity().getSupportFragmentManager().popBackStack();
-                }
+                NavHostFragment.findNavController(CrearPaciente.this)
+                        .navigate(R.id.action_nav_crear_paciente_to_nav_home);
+
             });
         } else {
             String finalMessage2 = "Error al guardar el paciente";

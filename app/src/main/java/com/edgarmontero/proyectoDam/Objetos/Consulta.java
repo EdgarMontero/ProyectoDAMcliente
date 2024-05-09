@@ -8,7 +8,17 @@ public class Consulta {
     private String idPaciente;
     private String tipoConsulta;
     private String descripcionConsulta;
-    private Date fechaConsulta;
+    private String fechaConsulta;
+    // Constructor
+    public Consulta(String tipoConsulta, String descripcionConsulta, String fechaConsulta, Long idConsulta, String idMedico, String idPaciente) {
+        this.tipoConsulta = tipoConsulta;
+        this.descripcionConsulta = descripcionConsulta;
+        this.fechaConsulta = fechaConsulta;
+        this.idConsulta = idConsulta;
+        this.idMedico = idMedico;
+        this.idPaciente = idPaciente;
+    }
+
 
     // Getters y setters
     public Long getIdConsulta() {
@@ -51,11 +61,11 @@ public class Consulta {
         this.descripcionConsulta = descripcionConsulta;
     }
 
-    public Date getFechaConsulta() {
+    public String getFechaConsulta() {
         return fechaConsulta;
     }
 
-    public void setFechaConsulta(Date fechaConsulta) {
+    public void setFechaConsulta(String fechaConsulta) {
         this.fechaConsulta = fechaConsulta;
     }
 }

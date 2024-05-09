@@ -3,7 +3,7 @@
     <string name="title_activity_menu_desplegable">MenuDesplegable</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_title">Proyecto DAM</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Ajustes</string>
@@ -24,7 +24,7 @@
     <string name="guardar_paciente">Crear paciente</string>
     <string name="select_user">Usuario</string>
 
-    <string name="ip">http://192.168.9.63/api/</string>
+    <string name="ip">http://10.0.2.2/api/</string>
 
     <string name="loginURL">http://192.168.1.15/api/login.php</string>
     <string name="fetchUsersURL">http://192.168.1.15/api/fetchUsers.php</string>
@@ -35,5 +35,6 @@
     <string name="buscar">Buscar</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
+    <string name="hint_dni_paciente">Buscar consultas de un paciente</string>
 
 </resources>

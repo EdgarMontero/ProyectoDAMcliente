@@ -31,8 +31,36 @@
                 android:id="@+id/buttonBuscarPaciente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buscar" />
+                android:text="@string/buscar" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextFechaInicio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/fecha_inicio"
+                android:focusable="false"
+                android:drawableStart="@drawable/ic_calendar_today_black_24dp"
+                android:drawablePadding="10dp"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/editTextFechaFin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/fecha_fin"
+                android:focusable="false"
+                android:drawableStart="@drawable/ic_calendar_today_black_24dp"
+                android:drawablePadding="10dp"
+                android:padding="12dp" />
         </LinearLayout>
 
         <ListView

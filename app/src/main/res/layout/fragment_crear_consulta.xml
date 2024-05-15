@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="ID del paciente"
-        android:inputType="number"
+        android:inputType="text"
         android:drawableStart="@drawable/ic_person_outline_black_24dp"
         android:drawablePadding="10dp"
         android:padding="12dp" />

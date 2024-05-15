@@ -1,6 +1,7 @@
 package com.edgarmontero.proyectoDam.ui;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class HistorialPaciente extends Fragment {
@@ -40,9 +42,42 @@ public class HistorialPaciente extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHistorialPacienteBinding.inflate(inflater, container, false);
+
         setupListView();
         setupSearch();
+        setupDatePicker();
+
         return binding.getRoot();
+    }
+
+    private void setupDatePicker() {
+        binding.editTextFechaFin.setOnClickListener(view -> {
+            Calendar calendario = Calendar.getInstance();
+            int year = calendario.get(Calendar.YEAR);
+            int month = calendario.get(Calendar.MONTH);
+            int day = calendario.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                    (datePicker, year1, monthOfYear, dayOfMonth) -> {
+                        String fechaSeleccionada = String.format("%04d-%02d-%02d", year1, monthOfYear + 1, dayOfMonth);
+                        binding.editTextFechaFin.setText(fechaSeleccionada);
+                    }, year, month, day);
+            datePickerDialog.show();
+        });
+
+        binding.editTextFechaInicio.setOnClickListener(view -> {
+            Calendar calendario = Calendar.getInstance();
+            int year = calendario.get(Calendar.YEAR);
+            int month = calendario.get(Calendar.MONTH);
+            int day = calendario.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                    (datePicker, year1, monthOfYear, dayOfMonth) -> {
+                        String fechaSeleccionada = String.format("%04d-%02d-%02d", year1, monthOfYear + 1, dayOfMonth);
+                        binding.editTextFechaInicio.setText(fechaSeleccionada);
+                    }, year, month, day);
+            datePickerDialog.show();
+        });
     }
 
     private void setupListView() {
@@ -169,9 +204,20 @@ public class HistorialPaciente extends Fragment {
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 
-                String data = URLEncoder.encode("dni_paciente", "UTF-8") + "=" + URLEncoder.encode(dni.toUpperCase(), "UTF-8");
+                String fechaInicio = binding.editTextFechaInicio.getText().toString();
+                String fechaFin = binding.editTextFechaFin.getText().toString();
 
-                writer.write(data);
+                StringBuilder data = new StringBuilder();
+                data.append(URLEncoder.encode("dni_paciente", "UTF-8")).append("=").append(URLEncoder.encode(dni.toUpperCase(), "UTF-8"));
+
+                if (!fechaInicio.isEmpty()) {
+                    data.append("&").append(URLEncoder.encode("fecha_inicio", "UTF-8")).append("=").append(URLEncoder.encode(fechaInicio, "UTF-8"));
+                }
+                if (!fechaFin.isEmpty()) {
+                    data.append("&").append(URLEncoder.encode("fecha_fin", "UTF-8")).append("=").append(URLEncoder.encode(fechaFin, "UTF-8"));
+                }
+
+                writer.write(data.toString());
                 writer.flush();
                 writer.close();
                 os.close();

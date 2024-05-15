@@ -45,32 +45,37 @@ public class CrearPaciente extends Fragment {
 
     private FragmentCrearPacienteBinding binding;
     List<User> usersList = new ArrayList<>();
+
+    private EditText etDni, etNombre, etFechaNacimiento, etDireccion, etTelefono;
     AutoCompleteTextView autoCompleteTextViewUser;
     Map<String, Integer> userNameToIdMap = new HashMap<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCrearPacienteBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
         autoCompleteTextViewUser = binding.autoCompleteTextViewUser;
         fetchUsers();
         setupViewBindings();
 
-        return root;
+        return binding.getRoot();
     }
 
     private void setupViewBindings() {
-        final EditText etDni = binding.etDniPaciente;
-        final EditText etNombre = binding.etNombrePaciente;
-        final EditText etFechaNacimiento = binding.etFechaNacimiento;
-        final EditText etDireccion = binding.etDireccion;
-        final EditText etTelefono = binding.etTelefono;
+        etDni = binding.etDniPaciente;
+        etNombre = binding.etNombrePaciente;
+        etFechaNacimiento = binding.etFechaNacimiento;
+        etDireccion = binding.etDireccion;
+        etTelefono = binding.etTelefono;
         Button btnSave = binding.btnGuardarPaciente;
 
         btnSave.setOnClickListener(v -> savePatient(etDni.getText().toString(), etNombre.getText().toString(),
                 etFechaNacimiento.getText().toString(), etDireccion.getText().toString(),
                 etTelefono.getText().toString()));
 
+        setupDatePicker(etFechaNacimiento);
+    }
+
+    private void setupDatePicker(EditText etFechaNacimiento) {
         etFechaNacimiento.setOnClickListener(view -> {
             Calendar calendario = Calendar.getInstance();
             int year = calendario.get(Calendar.YEAR);

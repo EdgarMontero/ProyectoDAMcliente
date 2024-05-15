@@ -39,12 +39,10 @@ public class CrearConsulta extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentCrearConsultaBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        // Configuración del botón
         setupViewBindings();
 
-        return root;
+        return binding.getRoot();
     }
 
     private void setupViewBindings() {

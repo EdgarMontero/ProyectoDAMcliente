@@ -21,9 +21,13 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        // Set up button click listeners
+        setupBtn();
+
+        return binding.getRoot();
+    }
+
+    private void setupBtn() {
         binding.btnHistorialPaciente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +67,6 @@ public class HomeFragment extends Fragment {
                         .navigate(R.id.action_nav_home_to_nav_crear_paciente);
             }
         });
-
-        return root;
     }
 
     @Override

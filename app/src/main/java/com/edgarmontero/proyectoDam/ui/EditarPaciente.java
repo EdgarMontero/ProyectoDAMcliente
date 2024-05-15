@@ -44,33 +44,14 @@ public class EditarPaciente extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentEditarPacienteBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        // Referencias a los componentes de la UI
-        editTextBuscarUsuario = binding.editTextBuscarUsuario;
-        buttonBuscarUsuario = binding.buttonBuscarUsuario;
-        etNombre = binding.etNombrePaciente;
-        etDni = binding.etDniPaciente;
-        etFechaNacimiento = binding.etFechaNacimiento;
-        etDireccion = binding.etDireccion;
-        etTelefono = binding.etTelefono;
-        btnSave = binding.btnGuardarPaciente;
+        setupViewBindings();
+        setupDatePicker();
 
-        // Configuración de los botones
-        buttonBuscarUsuario.setOnClickListener(v -> {
-            String dniPaciente = editTextBuscarUsuario.getText().toString();
-            buscarUsuario(dniPaciente);
-        });
+        return binding.getRoot();
+    }
 
-        btnSave.setOnClickListener(v -> {
-            String dniPaciente = etDni.getText().toString();
-            String nombre = etNombre.getText().toString();
-            String fechaNacimiento = etFechaNacimiento.getText().toString();
-            String direccion = etDireccion.getText().toString();
-            String telefono = etTelefono.getText().toString();
-            savePatient(dniPaciente, nombre, fechaNacimiento, direccion, telefono);
-        });
-
+    private void setupDatePicker() {
         etFechaNacimiento.setOnClickListener(view -> {
             Calendar calendario = Calendar.getInstance();
             int year = calendario.get(Calendar.YEAR);
@@ -84,8 +65,31 @@ public class EditarPaciente extends Fragment {
                     }, year, month, day);
             datePickerDialog.show();
         });
+    }
 
-        return root;
+    private void setupViewBindings() {
+        editTextBuscarUsuario = binding.editTextBuscarUsuario;
+        buttonBuscarUsuario = binding.buttonBuscarUsuario;
+        etNombre = binding.etNombrePaciente;
+        etDni = binding.etDniPaciente;
+        etFechaNacimiento = binding.etFechaNacimiento;
+        etDireccion = binding.etDireccion;
+        etTelefono = binding.etTelefono;
+        btnSave = binding.btnGuardarPaciente;
+
+        buttonBuscarUsuario.setOnClickListener(v -> {
+            String dniPaciente = editTextBuscarUsuario.getText().toString();
+            buscarUsuario(dniPaciente);
+        });
+
+        btnSave.setOnClickListener(v -> {
+            String dniPaciente = etDni.getText().toString();
+            String nombre = etNombre.getText().toString();
+            String fechaNacimiento = etFechaNacimiento.getText().toString();
+            String direccion = etDireccion.getText().toString();
+            String telefono = etTelefono.getText().toString();
+            savePatient(dniPaciente, nombre, fechaNacimiento, direccion, telefono);
+        });
     }
 
     private void buscarUsuario(String dniPaciente) {

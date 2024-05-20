@@ -16,22 +16,18 @@
         <action
             android:id="@+id/action_nav_home_to_nav_crear_consulta"
             app:destination="@id/nav_crear_consulta" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_editar_paciente"
-            app:destination="@id/nav_editar_paciente" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_agenda"
-            app:destination="@id/nav_agenda" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_crear_paciente"
-            app:destination="@id/nav_crear_paciente" />
+
     </fragment>
 
     <fragment
         android:id="@+id/nav_historial"
         android:name="com.edgarmontero.proyectoDam.ui.HistorialPaciente"
         android:label="@string/menu_historial"
-        tools:layout="@layout/fragment_historial_paciente" />
+        tools:layout="@layout/fragment_historial_paciente" >
+        <action
+            android:id="@+id/action_nav_historial_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_crear_consulta"
@@ -40,32 +36,6 @@
         tools:layout="@layout/fragment_crear_consulta" >
         <action
             android:id="@+id/action_nav_crear_consulta_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_editar_paciente"
-        android:name="com.edgarmontero.proyectoDam.ui.EditarPaciente"
-        android:label="@string/menu_editar_paciente"
-        tools:layout="@layout/fragment_editar_paciente" >
-        <action
-            android:id="@+id/action_nav_editar_paciente_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_agenda"
-        android:name="com.edgarmontero.proyectoDam.ui.Agenda"
-        android:label="@string/menu_agenda"
-        tools:layout="@layout/fragment_agenda" />
-
-    <fragment
-        android:id="@+id/nav_crear_paciente"
-        android:name="com.edgarmontero.proyectoDam.ui.CrearPaciente"
-        android:label="@string/menu_crear_paciente"
-        tools:layout="@layout/fragment_crear_paciente" >
-        <action
-            android:id="@+id/action_nav_crear_paciente_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
 

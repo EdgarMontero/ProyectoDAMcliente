@@ -2,8 +2,6 @@ package com.edgarmontero.proyectoDam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,46 +18,49 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class MainActivity extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
-    private EditText usernameEditText;
+    private EditText nameEditText;
+    private EditText emailEditText;
     private EditText passwordEditText;
-    private Button loginButton;
+    private Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
-        usernameEditText = findViewById(R.id.username);
+        nameEditText = findViewById(R.id.name);
+        emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
-        loginButton = findViewById(R.id.loginButton);
+        registerButton = findViewById(R.id.registerButton);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
+                String name = nameEditText.getText().toString();
+                String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                login(username, password);
+                register(name, email, password);
             }
         });
     }
 
-    private void login(String username, String password) {
+    private void register(String name, String email, String password) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL(getString(R.string.ip)+"login.php");
+                    URL url = new URL(getString(R.string.ip) + "register.php"); // Asegúrate de tener la URL correcta
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);
 
                     OutputStream os = conn.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                    String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+                    String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+                    data += "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
                     data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
-                    data += "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("paciente", "UTF-8");
 
                     writer.write(data);
                     writer.flush();
@@ -79,26 +80,11 @@ public class MainActivity extends AppCompatActivity {
                     in.close();
 
                     final String response = result.toString().trim();
-                    final String[] parts = response.split(",");
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (parts[0].equals("Login success")) {
-                                Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
-                                // Guardar DNI Medico en SharedPreferences
-                                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("dni_medico", parts[1]);
-                                editor.apply();
-
-                                // Cambio a la actividad del menú principal
-                                Intent intent = new Intent(MainActivity.this, MenuDesplegable.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                            }
+                            Toast.makeText(Register.this, response, Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -110,5 +96,4 @@ public class MainActivity extends AppCompatActivity {
 
         thread.start();
     }
-
 }

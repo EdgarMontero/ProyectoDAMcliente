@@ -19,19 +19,5 @@
             android:icon="@drawable/ic_add_circle"
             android:title="@string/menu_crear_consulta" />
 
-        <item
-            android:id="@+id/nav_editar_paciente"
-            android:icon="@drawable/ic_edit"
-            android:title="@string/menu_editar_paciente" />
-
-        <item
-            android:id="@+id/nav_agenda"
-            android:icon="@drawable/ic_calendar_today_black_24dp"
-            android:title="@string/menu_agenda" />
-
-        <item
-            android:id="@+id/nav_crear_paciente"
-            android:icon="@drawable/ic_person_add"
-            android:title="@string/menu_crear_paciente" />
     </group>
 </menu>

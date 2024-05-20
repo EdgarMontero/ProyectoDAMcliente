@@ -86,39 +86,6 @@ public class HistorialPaciente extends Fragment {
 
     }
 
-    private void showEditDialog(String item, String consultaId) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.dialog_editar_consulta, null);
-        builder.setView(dialogView);
-
-        EditText editTextTipoConsulta = dialogView.findViewById(R.id.editTextTipoConsulta);
-        EditText editTextDescripcionConsulta = dialogView.findViewById(R.id.editTextDescripcionConsulta);
-        EditText editTextFechaConsulta = dialogView.findViewById(R.id.editTextFechaConsulta);
-
-        String[] parts = item.split("\\n");
-        editTextTipoConsulta.setText(parts[0].substring(parts[0].indexOf(':') + 1).trim());
-        editTextDescripcionConsulta.setText(parts[1].substring(parts[1].indexOf(':') + 1).trim());
-        editTextFechaConsulta.setText(parts[2].substring(parts[2].indexOf(':') + 1).trim());
-
-        builder.setPositiveButton("Guardar Cambios", (dialog, which) -> {
-            guardarCambios(consultaId, editTextTipoConsulta.getText().toString(),
-                    editTextDescripcionConsulta.getText().toString(),
-                    editTextFechaConsulta.getText().toString());
-        });
-
-        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
-
-        // Agregar botón para borrar la consulta
-        builder.setNeutralButton("Borrar", (dialog, which) -> {
-            borrarConsulta(consultaId); // Método para borrar la consulta
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-
     private void guardarCambios(String consultaId, String tipo, String descripcion, String fecha) {
         Thread thread = new Thread(() -> {
             try {
@@ -251,8 +218,6 @@ public class HistorialPaciente extends Fragment {
         getActivity().runOnUiThread(() -> {
             updateListView(response);
         });
-
-
     }
 
     private void updateListView(String jsonData) {
@@ -273,7 +238,6 @@ public class HistorialPaciente extends Fragment {
             binding.listViewConsultas.setOnItemClickListener((parent, view, position, id) -> {
                 String item = adapter.getItem(position);
                 String consultaId = consultaIds.get(position); // Obtener el ID de la consulta
-                showEditDialog(item, consultaId); // Pasar el ID al diálogo de edición
             });
 
         } catch (JSONException e) {

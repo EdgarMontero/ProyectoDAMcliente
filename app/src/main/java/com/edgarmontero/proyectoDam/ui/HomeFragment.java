@@ -44,29 +44,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.btnEditarPaciente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.action_nav_home_to_nav_editar_paciente);
-            }
-        });
-
-        binding.btnAgenda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.action_nav_home_to_nav_agenda);
-            }
-        });
-
-        binding.btnCrearPaciente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.action_nav_home_to_nav_crear_paciente);
-            }
-        });
     }
 
     @Override

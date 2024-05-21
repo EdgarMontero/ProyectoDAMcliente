@@ -30,7 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="@string/telefono" />
+        android:hint="@string/telefono"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/etNombreApellido"

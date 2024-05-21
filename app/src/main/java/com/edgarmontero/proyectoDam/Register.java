@@ -2,10 +2,12 @@ package com.edgarmontero.proyectoDam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,10 +26,10 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Calendar;
 
 public class Register extends AppCompatActivity {
     private Button registerButton;
-
     private Context context;
     private EditText dniEditText, nombreApellidoEditText, direccionEditText, fechaNacimientoEditText, telefonoEditText, password2EditText, passwordEditText, emailEditText, nameEditText;
     private int userId;
@@ -44,13 +46,16 @@ public class Register extends AppCompatActivity {
     private void setupElements() {
         nameEditText = findViewById(R.id.etNombreUsuario);
         emailEditText = findViewById(R.id.etemail);
-        dniEditText =  findViewById(R.id.etDni);
+        telefonoEditText = findViewById(R.id.etTelefono);
+        dniEditText = findViewById(R.id.etDni);
         direccionEditText = findViewById(R.id.etDireccion);
         fechaNacimientoEditText = findViewById(R.id.etFechaNacimiento);
         passwordEditText = findViewById(R.id.etpassword);
         password2EditText = findViewById(R.id.etpasswordrepeat);
         nombreApellidoEditText = findViewById(R.id.etNombreApellido);
         context = Register.this;
+
+        registerButton = findViewById(R.id.registerButton);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +73,20 @@ public class Register extends AppCompatActivity {
                 register(name, email, password, password2, dni, nombreApellido, direccion, fecha, telefono);
             }
         });
+
+        fechaNacimientoEditText.setOnClickListener(view -> {
+            Calendar calendario = Calendar.getInstance();
+            int year = calendario.get(Calendar.YEAR);
+            int month = calendario.get(Calendar.MONTH);
+            int day = calendario.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(Register.this,
+                    (datePicker, year1, monthOfYear, dayOfMonth) -> {
+                        String fechaSeleccionada = String.format("%04d-%02d-%02d", year1, monthOfYear + 1, dayOfMonth);
+                        fechaNacimientoEditText.setText(fechaSeleccionada);
+                    }, year, month, day);
+            datePickerDialog.show();
+        });
     }
 
     private void register(String name, String email, String password, String password2, String dni, String nombreApellido, String direccion, String fecha, String telefono) {
@@ -77,15 +96,23 @@ public class Register extends AppCompatActivity {
     }
 
     private boolean areFieldsValid(String name, String email, String password, String password2, String dni, String telefono, String nombreApellido, String direccion, String fecha) {
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || password2.isEmpty()) {
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || password2.isEmpty() || dni.isEmpty() || telefono.isEmpty() || nombreApellido.isEmpty() || direccion.isEmpty() || fecha.isEmpty()) {
             Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!Validator.isEmailValid(email, context)) {
             return false;
         }
-
         if (!Validator.isPassValid(password, password2, context)) {
+            return false;
+        }
+        if (!Validator.validarDNI(dni, context)) {
+            return false;
+        }
+        if (!Validator.isPhoneValid(telefono, context)) {
+            return false;
+        }
+        if (!Validator.isDateValid(fecha, context)) {
             return false;
         }
         return true;
@@ -180,7 +207,7 @@ public class Register extends AppCompatActivity {
                 processServerResponse(conn);
             } catch (Exception e) {
                 e.printStackTrace();
-                    Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT). show();
+                runOnUiThread(() -> Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show());
             }
         });
         thread.start();
@@ -200,13 +227,17 @@ public class Register extends AppCompatActivity {
         in.close();
         conn.disconnect();
 
-        if (result.toString().contains("success")) {
-            String finalMessage = "Paciente guardado con éxito";
-                Toast.makeText(context, finalMessage, Toast.LENGTH_SHORT).show();
-        } else {
-            String finalMessage2 = "Error al guardar el paciente";
-                Toast.makeText(context, finalMessage2, Toast.LENGTH_SHORT).show();
-        }
-    }
+        runOnUiThread(() -> {
+            if (result.toString().contains("success")) {
+                String finalMessage = "Paciente guardado con éxito";
 
+                Toast.makeText(context, finalMessage, Toast.LENGTH_SHORT).show();
+                finish();
+
+            } else {
+                String finalMessage2 = "Error al guardar el paciente";
+                Toast.makeText(context, finalMessage2, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

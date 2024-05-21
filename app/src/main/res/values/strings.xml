@@ -41,5 +41,11 @@
     <string name="filtrar">Filtrar</string>
     <string name="Historial">Historial</string>
     <string name="CrearConsulta">Crear Consulta</string>
+    <string name="NoRegistrado">No estas registrado? Create una cuenta</string>
+    <string name="CrearCuenta">Registrate</string>
+    <string name="RepetirContraseña">Repetir Contraseña</string>
+    <string name="Registarse">Registarse</string>
+    <string name="CorreoElectronico">Correo Electronico</string>
+    <string name="NombreApellido">Nombre y apellido</string>
 
 </resources>

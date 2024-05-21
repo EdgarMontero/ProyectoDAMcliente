@@ -22,9 +22,8 @@ import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private Button loginButton;
+    private EditText usernameEditText, passwordEditText;
+    private Button loginButton, registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
+        passwordEditText = findViewById(R.id.etpassword);
         loginButton = findViewById(R.id.loginButton);
+        registerButton = findViewById(R.id.registerButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 login(username, password);
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Register.class);
+                startActivity(intent);
             }
         });
     }

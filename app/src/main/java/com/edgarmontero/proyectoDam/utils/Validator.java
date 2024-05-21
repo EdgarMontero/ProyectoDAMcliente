@@ -56,4 +56,27 @@ public class Validator {
         }
         return true;
     }
+
+    public static boolean isPassValid(String pass, String password2, Context context) {
+        if (pass.equals(password2)){
+            if (!pass.matches(".{8}")) {
+                Toast.makeText(context, "La contraseña debe tener 8 caracteres", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            return true;
+        }else {
+            Toast.makeText(context, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    public static boolean isEmailValid(String email, Context context) {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
+        if (!email.matches(emailPattern)) {
+            Toast.makeText(context, "El correo electrónico no es válido", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
 }

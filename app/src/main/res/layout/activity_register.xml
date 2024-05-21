@@ -14,30 +14,73 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="303dp"
+        android:layout_height="175dp"
         android:layout_gravity="center"
         app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/etNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/username" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/etTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Email" />
+        android:hint="@string/telefono" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/etNombreApellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/NombreApellido" />
+
+    <EditText
+        android:id="@+id/etDni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/dni_paciente" />
+
+    <EditText
+        android:id="@+id/etDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/direccion" />
+
+    <EditText
+        android:id="@+id/etFechaNacimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/fecha_nacimiento" />
+
+    <EditText
+        android:id="@+id/etemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/CorreoElectronico" />
+
+    <EditText
+        android:id="@+id/etpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/etpasswordrepeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/RepetirContraseña"
         android:inputType="textPassword" />
 
     <Button
@@ -45,8 +88,7 @@
         android:layout_width="131dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Register" />
+        android:text="@string/Registarse" />
   </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

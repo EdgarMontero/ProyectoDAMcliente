@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                 // Guardar DNI Medico en SharedPreferences
                                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("dni_medico", parts[1]);
+                                editor.putString("dni_paciente", parts[1]);
                                 editor.apply();
 
                                 // Cambio a la actividad del menú principal

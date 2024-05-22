@@ -1,14 +1,14 @@
 package com.edgarmontero.proyectoDam.ui;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,14 +38,17 @@ import java.util.HashMap;
 public class HistorialPaciente extends Fragment {
 
     private FragmentHistorialPacienteBinding binding;
+    private String dniPaciente;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHistorialPacienteBinding.inflate(inflater, container, false);
-
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        dniPaciente = sharedPreferences.getString("dni_paciente", "");
         setupListView();
-        setupSearch();
         setupDatePicker();
+        performSearch(dniPaciente);
+
 
         return binding.getRoot();
     }
@@ -84,80 +87,6 @@ public class HistorialPaciente extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, new ArrayList<>());
         binding.listViewConsultas.setAdapter(adapter);
 
-    }
-
-    private void guardarCambios(String consultaId, String tipo, String descripcion, String fecha) {
-        Thread thread = new Thread(() -> {
-            try {
-                URL url = new URL(getString(R.string.ip) + "actualizarConsulta.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-
-                String data = URLEncoder.encode("id_consulta", "UTF-8") + "=" + URLEncoder.encode(consultaId, "UTF-8") +
-                        "&" + URLEncoder.encode("tipo_consulta", "UTF-8") + "=" + URLEncoder.encode(tipo, "UTF-8") +
-                        "&" + URLEncoder.encode("descripcion", "UTF-8") + "=" + URLEncoder.encode(descripcion, "UTF-8") +
-                        "&" + URLEncoder.encode("fecha", "UTF-8") + "=" + URLEncoder.encode(fecha, "UTF-8");
-
-                writer.write(data);
-                writer.flush();
-                writer.close();
-                os.close();
-
-                InputStream in = conn.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                StringBuilder result = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-
-                JSONObject response = new JSONObject(result.toString());
-
-                getActivity().runOnUiThread(() -> {
-                    try {
-                        if (response.getBoolean("success")) {
-                            Toast.makeText(getContext(), "Cambios guardados con éxito", Toast.LENGTH_SHORT).show();
-                            performSearch(binding.editTextDniPaciente.getText().toString()); // Actualizar lista
-                        } else {
-                            Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-
-                reader.close();
-                in.close();
-                conn.disconnect();
-            } catch (Exception e) {
-                e.printStackTrace();
-                getActivity().runOnUiThread(() -> {
-                    Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
-                });
-            }
-        });
-        thread.start();
-    }
-
-    private void setupSearch() {
-        binding.buttonBuscarPaciente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                performSearch(binding.editTextDniPaciente.getText().toString());
-            }
-        });
-
-        binding.editTextDniPaciente.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                performSearch(binding.editTextDniPaciente.getText().toString());
-                return true;
-            }
-            return false;
-        });
     }
 
     private void performSearch(String dni) {
@@ -277,7 +206,7 @@ public class HistorialPaciente extends Fragment {
                     try {
                         if (response.getBoolean("success")) {
                             Toast.makeText(getContext(), "Consulta eliminada", Toast.LENGTH_SHORT).show();
-                            performSearch(binding.editTextDniPaciente.getText().toString()); // Actualizar lista
+                            performSearch(dniPaciente);
                         } else {
                             Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                         }

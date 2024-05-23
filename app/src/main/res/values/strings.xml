@@ -24,7 +24,7 @@
     <string name="guardar_paciente">Crear paciente</string>
     <string name="select_user">Usuario</string>
 
-    <string name="ip">http://192.168.9.63/api/</string>
+    <string name="ip">http://10.0.2.2/api/</string>
 
     <string name="buscar_usuario">Introducir DNI del paciente</string>
     <string name="buscar">Buscar</string>
@@ -34,13 +34,29 @@
     <string name="fecha_inicio">Fecha inicio</string>
     <string name="fecha_fin">Fecha final</string>
     <string name="filtrar">Filtrar</string>
-    <string name="Historial">Historial</string>
-    <string name="CrearConsulta">Crear Consulta</string>
-    <string name="NoRegistrado">No estas registrado? Create una cuenta</string>
-    <string name="CrearCuenta">Registrate</string>
-    <string name="RepetirContraseña">Repetir Contraseña</string>
-    <string name="Registarse">Registarse</string>
-    <string name="CorreoElectronico">Correo Electronico</string>
-    <string name="NombreApellido">Nombre y apellido</string>
+    <string name="historial">Historial</string>
+    <string name="crear_consulta">Crear Consulta</string>
+    <string name="no_registrado">No estas registrado? Create una cuenta</string>
+    <string name="crear_cuenta">Registrate</string>
+    <string name="repetir_contraseña">Repetir Contraseña</string>
+    <string name="registarse">Registarse</string>
+    <string name="correo_electronico">Correo Electronico</string>
+    <string name="nombre_apellido">Nombre y apellido</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="permitir_notificaciones">Permitir notificaciones</string>
+    <string name="apariencia">Apariencia</string>
+    <string name="habilitar_moso_oscuro">Habilitar el modo oscuro</string>
+    <string name="tipo_consulta">Tipo de consulta</string>
+    <string name="descripcion_consulta">Descripcion de la consulta</string>
+    <string name="fecha_consulta">Fecha de la consulta</string>
+    <string name="pedir_consulta">Pedir consulta</string>
+    <string-array name="estado_consulta_buscar_options">
+        <item>Todos</item>
+        <item>pendiente</item>
+        <item>aceptada</item>
+        <item>cancelada</item>
+        <item>finalizada</item>
+    </string-array>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.edgarmontero.proyectoDam;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,11 +23,20 @@ import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String PREFERENCES_FILE = "com.edgarmontero.proyectoDam.preferences";
+    private static final String DARK_MODE_KEY = "dark_mode_enabled";
     private EditText usernameEditText, passwordEditText;
     private Button loginButton, registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_FILE, MODE_PRIVATE);
+        boolean isDarkModeEnabled = preferences.getBoolean(DARK_MODE_KEY, false);
+        if (isDarkModeEnabled) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -99,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("dni_paciente", parts[1]);
+                                editor.putString("dni_medico", parts[2]);
                                 editor.apply();
 
                                 // Cambio a la actividad del menú principal

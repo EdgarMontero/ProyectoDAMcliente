@@ -26,6 +26,7 @@
                 android:drawablePadding="10dp"
                 android:padding="12dp" />
 
+
             <EditText
                 android:id="@+id/editTextFechaFin"
                 android:layout_width="0dp"
@@ -36,7 +37,18 @@
                 android:drawableStart="@drawable/ic_calendar_today_black_24dp"
                 android:drawablePadding="10dp"
                 android:padding="12dp" />
+            <Button
+                android:id="@+id/buttonBuscarPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filtrar" />
         </LinearLayout>
+        <Spinner
+            android:id="@+id/spinnerEstadoConsulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:entries="@array/estado_consulta_buscar_options" />
 
         <ListView
             android:id="@+id/listViewConsultas"

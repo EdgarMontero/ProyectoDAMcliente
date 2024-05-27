@@ -1,4 +1,4 @@
-package com.edgarmontero.proyectoDam.ui;
+package com.edgarmontero.proyectoDam.fragment;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -35,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class HistorialPaciente extends Fragment {
+public class HistorialPacienteFragment extends Fragment {
 
     private FragmentHistorialPacienteBinding binding;
     private String dniPaciente;

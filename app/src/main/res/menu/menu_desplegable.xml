@@ -6,4 +6,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_editar_perfil"
+        android:orderInCategory="100"
+        android:title="@string/editar_perfil"
+        app:showAsAction="never" />
 </menu>

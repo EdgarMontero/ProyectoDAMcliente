@@ -1,4 +1,4 @@
-package com.edgarmontero.proyectoDam;
+package com.edgarmontero.proyectoDam.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.edgarmontero.proyectoDam.R;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Register.class);
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                                 editor.apply();
 
                                 // Cambio a la actividad del menú principal
-                                Intent intent = new Intent(MainActivity.this, MenuDesplegable.class);
+                                Intent intent = new Intent(MainActivity.this, MenuDesplegableActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();

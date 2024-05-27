@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.edgarmontero.proyectoDam.ui.HomeFragment"
+        android:name="com.edgarmontero.proyectoDam.fragment.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/nav_historial"
-        android:name="com.edgarmontero.proyectoDam.ui.HistorialPaciente"
+        android:name="com.edgarmontero.proyectoDam.fragment.HistorialPacienteFragment"
         android:label="@string/menu_historial"
         tools:layout="@layout/fragment_historial_paciente" >
         <action
@@ -34,8 +34,8 @@
 
     <fragment
         android:id="@+id/nav_crear_consulta"
-        android:name="com.edgarmontero.proyectoDam.ui.CrearConsulta"
-        android:label="@string/menu_crear_consulta"
+        android:name="com.edgarmontero.proyectoDam.fragment.CrearConsultaFragment"
+        android:label="@string/pedir_consulta"
         tools:layout="@layout/fragment_crear_consulta" >
         <action
             android:id="@+id/action_nav_crear_consulta_to_nav_home"
@@ -44,11 +44,21 @@
 
     <fragment
         android:id="@+id/nav_ajustes"
-        android:name="com.edgarmontero.proyectoDam.ui.Ajustes"
+        android:name="com.edgarmontero.proyectoDam.fragment.AjustesFragment"
         android:label="@string/ajustes"
         tools:layout="@layout/fragment_ajustes" >
         <action
             android:id="@+id/action_nav_ajustes_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_editar_perfil"
+        android:name="com.edgarmontero.proyectoDam.fragment.EditarPerfilFragment"
+        android:label="@string/editar_perfil"
+        tools:layout="@layout/fragment_editar_perfil" >
+        <action
+            android:id="@+id/action_nav_editar_perfil_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
 

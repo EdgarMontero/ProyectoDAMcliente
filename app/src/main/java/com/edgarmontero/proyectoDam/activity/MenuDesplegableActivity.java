@@ -1,4 +1,4 @@
-package com.edgarmontero.proyectoDam;
+package com.edgarmontero.proyectoDam.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.edgarmontero.proyectoDam.R;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.edgarmontero.proyectoDam.databinding.ActivityMenuDesplegableBinding;
 
-public class MenuDesplegable extends AppCompatActivity {
+public class MenuDesplegableActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuDesplegableBinding binding;
@@ -113,6 +113,12 @@ public class MenuDesplegable extends AppCompatActivity {
         if (id == R.id.action_settings) {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu_desplegable);
             navController.navigate(R.id.nav_ajustes);
+            return true;
+        }
+
+        if (id == R.id.action_editar_perfil) {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu_desplegable);
+            navController.navigate(R.id.nav_editar_perfil);
             return true;
         }
 

@@ -1,4 +1,4 @@
-package com.edgarmontero.proyectoDam.ui;
+package com.edgarmontero.proyectoDam.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.edgarmontero.proyectoDam.R;
 import com.edgarmontero.proyectoDam.databinding.FragmentCrearConsultaBinding;
-import com.edgarmontero.proyectoDam.utils.Validator;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,7 +31,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
 
-public class CrearConsulta extends Fragment {
+public class CrearConsultaFragment extends Fragment {
 
     private FragmentCrearConsultaBinding binding;
 
@@ -157,7 +156,7 @@ public class CrearConsulta extends Fragment {
             getActivity().runOnUiThread(() -> {
                 Toast.makeText(getContext(), finalMessage, Toast.LENGTH_SHORT).show();
                 // Retroceder al fragmento anterior
-                NavHostFragment.findNavController(CrearConsulta.this)
+                NavHostFragment.findNavController(CrearConsultaFragment.this)
                         .navigate(R.id.action_nav_crear_consulta_to_nav_home);
 
             });

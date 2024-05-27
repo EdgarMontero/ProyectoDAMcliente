@@ -1,4 +1,4 @@
-package com.edgarmontero.proyectoDam;
+package com.edgarmontero.proyectoDam.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +7,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.edgarmontero.proyectoDam.R;
 import com.edgarmontero.proyectoDam.utils.Validator;
 
 import org.json.JSONException;
@@ -28,7 +28,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private Context context;
     private EditText dniEditText, nombreApellidoEditText, direccionEditText, fechaNacimientoEditText, telefonoEditText, password2EditText, passwordEditText, emailEditText, nameEditText;
@@ -53,7 +53,7 @@ public class Register extends AppCompatActivity {
         passwordEditText = findViewById(R.id.etpassword);
         password2EditText = findViewById(R.id.etpasswordrepeat);
         nombreApellidoEditText = findViewById(R.id.etNombreApellido);
-        context = Register.this;
+        context = RegisterActivity.this;
 
         registerButton = findViewById(R.id.registerButton);
 
@@ -80,7 +80,7 @@ public class Register extends AppCompatActivity {
             int month = calendario.get(Calendar.MONTH);
             int day = calendario.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(Register.this,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this,
                     (datePicker, year1, monthOfYear, dayOfMonth) -> {
                         String fechaSeleccionada = String.format("%04d-%02d-%02d", year1, monthOfYear + 1, dayOfMonth);
                         fechaNacimientoEditText.setText(fechaSeleccionada);

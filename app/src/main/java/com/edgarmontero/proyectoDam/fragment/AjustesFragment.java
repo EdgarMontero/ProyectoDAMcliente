@@ -1,4 +1,4 @@
-package com.edgarmontero.proyectoDam.ui;
+package com.edgarmontero.proyectoDam.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,7 +14,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 import com.edgarmontero.proyectoDam.R;
 
-public class Ajustes extends Fragment {
+public class AjustesFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -25,12 +25,12 @@ public class Ajustes extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Ajustes() {
+    public AjustesFragment() {
         // Required empty public constructor
     }
 
-    public static Ajustes newInstance(String param1, String param2) {
-        Ajustes fragment = new Ajustes();
+    public static AjustesFragment newInstance(String param1, String param2) {
+        AjustesFragment fragment = new AjustesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

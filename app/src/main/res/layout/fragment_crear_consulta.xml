@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="#FAFAFA"
-    tools:context=".ui.CrearConsulta">
+    tools:context=".fragment.CrearConsultaFragment">
 
     <EditText
         android:id="@+id/etTipoConsulta"

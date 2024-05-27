@@ -1,6 +1,4 @@
-package com.edgarmontero.proyectoDam.Objetos;
-
-import java.util.Date;
+package com.edgarmontero.proyectoDam.objetos;
 
 public class Consulta {
     private Long idConsulta;

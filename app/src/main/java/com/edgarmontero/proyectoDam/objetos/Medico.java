@@ -1,4 +1,4 @@
-package com.edgarmontero.proyectoDam.Objetos;
+package com.edgarmontero.proyectoDam.objetos;
 
 public class Medico {
     private String dniMedico;

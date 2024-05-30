@@ -39,7 +39,7 @@ public class Validator {
             Date fechaNac = sdf.parse(fecha);
             Date fechaActual = new Date();
             if (!fechaNac.after(fechaActual)) { // Cambiar "before" a "after"
-                Toast.makeText(context, "La fecha debe ser posterior al día de hoy", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "La fecha debe ser anterior al día de hoy", Toast.LENGTH_SHORT).show();
                 return false;
             }
         } catch (ParseException e) {

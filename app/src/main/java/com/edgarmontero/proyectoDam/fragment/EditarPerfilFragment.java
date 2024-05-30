@@ -50,7 +50,7 @@ public class EditarPerfilFragment extends Fragment {
 
         setupViewBindings();
         setupDatePicker();
-        buscarUsuario(dniPaciente);
+        buscarUsuario();
 
         return binding.getRoot();
     }
@@ -85,11 +85,11 @@ public class EditarPerfilFragment extends Fragment {
             String fechaNacimiento = etFechaNacimiento.getText().toString();
             String direccion = etDireccion.getText().toString();
             String telefono = etTelefono.getText().toString();
-            savePatient(dniPaciente, nombre, fechaNacimiento, direccion, telefono);
+            savePatient(nombre, fechaNacimiento, direccion, telefono);
         });
     }
 
-    private void buscarUsuario(String dniPaciente) {
+    private void buscarUsuario() {
         Thread thread = new Thread(() -> {
             try {
                 URL url = new URL(getString(R.string.ip) + "buscarPaciente.php");
@@ -151,20 +151,16 @@ public class EditarPerfilFragment extends Fragment {
         });
     }
 
-    private void savePatient(String dni, String nombre, String fechaNacimiento, String direccion, String telefono) {
-        if (areFieldsValid(dni, nombre, fechaNacimiento, direccion, telefono)) {
-            savePatientData(dni, nombre, fechaNacimiento, direccion, telefono);
+    private void savePatient(String nombre, String fechaNacimiento, String direccion, String telefono) {
+        if (areFieldsValid(nombre, fechaNacimiento, direccion, telefono)) {
+            savePatientData(nombre, fechaNacimiento, direccion, telefono);
         }
     }
 
-    private boolean areFieldsValid(String dni, String nombre, String fechaNacimiento, String direccion, String telefono) {
+    private boolean areFieldsValid(String nombre, String fechaNacimiento, String direccion, String telefono) {
         Context context = getContext();
-        if (dni.isEmpty() || nombre.isEmpty() || fechaNacimiento.isEmpty() || direccion.isEmpty() || telefono.isEmpty()) {
+        if (nombre.isEmpty() || fechaNacimiento.isEmpty() || direccion.isEmpty() || telefono.isEmpty()) {
             Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (!Validator.validarDNI(dni, context)) {
             return false;
         }
 
@@ -179,7 +175,7 @@ public class EditarPerfilFragment extends Fragment {
         return true;
     }
 
-    private void savePatientData(String dni, String nombre, String fechaNacimiento, String direccion, String telefono) {
+    private void savePatientData(String nombre, String fechaNacimiento, String direccion, String telefono) {
 
         Thread thread = new Thread(() -> {
             try {
